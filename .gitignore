@@ -11,3 +11,4 @@ terraform/.terraform
 docker/
 *.csvdata/output/
 Jenkinsfile
+data/output
