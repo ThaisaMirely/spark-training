@@ -1,6 +1,6 @@
 timestamps {
     node() {
-        def userId = "facilitador"
+        def userId = "par_06"
         def mainClass = "com.thoughtworks.exercises.streaming.NeatTotal"
         def artifactBucket = "com.thoughtworks.training.de.recife/${userId}/bin"
 
