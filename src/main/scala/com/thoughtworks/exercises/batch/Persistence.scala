@@ -19,14 +19,14 @@ object Persistence {
     val orderItemsBucket = s"$baseBucket/$username/$dataFilesBucket/orderItems"
     val productsBucket = s"$baseBucket/$username/$dataFilesBucket/products"
 
-    val ordersParquetBucket = s"$baseBucket/$username/$dataFilesBucket/out/parquet/orders"
-    val orderItemsParquetBucket = s"$baseBucket/$username/$dataFilesBucket/out/parquet/orderItems"
-    val productsParquetBucket = s"$baseBucket/$username/$dataFilesBucket/out/parquet/products"
+    val ordersParquetBucket = s"$baseBucket/$username/$dataFilesBucket/output/parquet/orders"
+    val orderItemsParquetBucket = s"$baseBucket/$username/$dataFilesBucket/output/parquet/orderItems"
+    val productsParquetBucket = s"$baseBucket/$username/$dataFilesBucket/output/parquet/products"
 
 
     val spark = SparkSession
     .builder()
-    //.master("local")
+//    .master("local")
     .appName("Data Engineering Capability Development - ETL Exercises")
     .getOrCreate()
 
@@ -50,8 +50,8 @@ object Persistence {
       .repartition(200, $"OrderId")
       .write
       .mode(SaveMode.Overwrite)
-      .partitionBy("OrderId")
-      .parquet(orderItemsParquetBucket)
+//      .partitionBy("OrderId")
+      .orc(orderItemsParquetBucket)
 
     spark.read
       .option("delimiter", ";")
@@ -61,5 +61,7 @@ object Persistence {
       .write
       .mode(SaveMode.Overwrite)
       .json(productsParquetBucket)
+
+    while(true){}
   }
 }
